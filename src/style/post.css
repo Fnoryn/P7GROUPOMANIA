@@ -1,0 +1,78 @@
+@import './globalroot.css';
+
+.header{
+    background: var(--bgPost) !important;
+    padding: 7px !important;
+    height: 32px;
+    color: #000000 !important;
+    text-align: start;
+}
+
+.post{
+    width: 599px;
+    height: 190px !important;
+    background: var(--bgPost) !important;
+    border-radius: 10px !important;
+    border: none !important;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.main-post{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px !important;
+}
+
+.img-post{
+    height: 135px;
+    width: 135px !important;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 5px;
+    padding: 7px !important;
+    object-fit: cover;
+}
+
+.paragraph-post{
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 17px;
+    align-items: left;
+    text-align: justify;
+    color: #000000 !important;
+}
+
+.txt-post{
+    display: flex;
+    flex-direction: row;
+    padding: 7px !important;
+}
+
+.like-post{
+    height: 1px;
+    margin: 0;
+    padding: 0;
+}
+
+.btn-like{
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--primary)!important;
+    position: fixed;
+    top: 165px;
+    left: 20px;
+    font-size: large !important;
+}
+
+.img-card{
+    height: 150px;
+    width: 150px;
+    padding: 0 !important;
+}
+
+.btn-post{
+    background-color: transparent !important;
+    border: none !important;
+}

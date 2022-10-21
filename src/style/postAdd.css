@@ -1,0 +1,77 @@
+@import './globalroot.css';
+
+.main-card{
+    width: 800px;
+    height: 700px !important;
+    padding: 20px;
+    display: flex !important;
+    flex-direction: row !important;
+    /* align-self: center !important; */
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    align-self: center !important;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: var(--bgPost) !important;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px !important;
+    border: none !important;
+}
+
+.upload-img{
+    background-color: var(--bgPost);
+    width: 90px;
+    height: 580px;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    padding: 7px !important;
+}
+
+.btn-upload-img{
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+    margin-top: 170px;
+    background-color: var(--primary) !important;
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+.btn-upload-img:hover{
+    background-color: var(--secondary) !important;
+}
+
+.bs-img{
+    font-size: 100pt;
+}
+
+.username-card{
+    margin: 0 auto;
+    padding: auto;
+}
+
+.textarea-card{
+    resize: none;
+    height: 472px;
+}
+
+.btn-publier{
+    padding: 0px 40px 0px 40px !important;
+    font-size: larger !important;
+    background-color: var(--primary) !important;
+    border: none !important;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+}
+
+.btn-publier:hover{
+    background-color: var(--secondary) !important;
+}
+
+.card-publier{
+    position: absolute;
+    top: 665px;
+}

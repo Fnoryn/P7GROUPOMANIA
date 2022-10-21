@@ -1,0 +1,49 @@
+@import './globalroot.css';
+
+@media screen and (max-width: 425px){
+        .img-logo{
+            display: none;
+        }
+}
+
+.navbar {
+    background-color: var(--primary);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.logo{
+    margin-right: 28%;
+}
+
+.img-logo{
+    width: 130px;
+    align-items: flex-start;
+}
+
+.unactive{
+    font-weight: bolder;
+    color: white ;
+    text-decoration: none;
+    margin-right: 35px;
+    margin-left: 35px;
+}
+.unactive:hover{
+    text-decoration: none;
+    color: var(--secondary);
+}
+.activeLink {
+    font-weight: bold;
+    color: black;
+    text-decoration: underline;
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
+.activeLink:hover{
+    color: black;
+}
+
+.nav-lien{
+    justify-content: space-between;
+    font-size: large;
+}
