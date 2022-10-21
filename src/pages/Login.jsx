@@ -11,7 +11,7 @@ import {useState} from 'react'
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
-  
+   
     if (authMode === "signin") {
       return (
         <div className="Auth-form-container" style={style}>
