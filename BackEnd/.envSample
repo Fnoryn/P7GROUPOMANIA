@@ -1,0 +1,12 @@
+# serv
+PORT = 
+
+# mongoDb
+
+USER_DB = 
+PASSWORD_DB = 
+LINK_DB = cluster0.wbddpmc.mongodb.net/
+
+# authentification 
+SEL = 
+RANDOM_SECRET_TOEKN = 
