@@ -20,7 +20,6 @@ function CollapsibleExample() {
                 <NavLink className={({isActive}) => (isActive ? "activeLink" : "unactive")} to="/home">Acceuil</NavLink>
                 <NavLink className={({isActive}) => (isActive ? "activeLink" : "unactive")} to="/list">Publication</NavLink>
             </Container>
-
           </Nav>
           <Nav>
           <NavDropdown  title="UserName" id="collasible-nav-dropdown">

@@ -1,5 +1,9 @@
 @import './globalroot.css';
 
+body{
+    font-family: 'lato';
+}
+
 .publi-post{
     width: 261px;
     background-color: var(--bgPost) !important;

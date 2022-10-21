@@ -6,12 +6,13 @@ import {useState} from 'react'
 
 
  function Auth (props) {
-    let [authMode, setAuthMode] = useState("signin")
-  
+    const [authMode, setAuthMode] = useState("signin")
+
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
    
+
     if (authMode === "signin") {
       return (
         <div className="Auth-form-container" style={style}>
@@ -19,7 +20,7 @@ import {useState} from 'react'
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">Sign In</h3>
               <div className="text-center">
-                Not registered yet?{" "}
+                Pas de compte ?{" "}
                 <span className="link-primary" onClick={changeAuthMode}>
                   Sign Up
                 </span>
@@ -42,7 +43,7 @@ import {useState} from 'react'
               </div>
               <div className="d-grid gap-2 mt-3">
                 <Button type="submit" className="btn btn-primary" href="/home">
-                  Submit
+                  Connexion
                 </Button>
               </div>
             </div>
@@ -57,7 +58,7 @@ import {useState} from 'react'
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center">
-              Already registered?{" "}
+              Déjà inscrit?{" "}
               <span className="link-primary" onClick={changeAuthMode}>
                 Sign In
               </span>
@@ -88,7 +89,7 @@ import {useState} from 'react'
             </div>
             <div className="d-grid gap-2 mt-3">
               <Button type="submit" className="btn btn-primary" href="/home">
-                Submit
+                Connexion
               </Button>
             </div>
           </div>

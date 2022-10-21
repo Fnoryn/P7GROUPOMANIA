@@ -8,6 +8,10 @@
     text-align: start;
 }
 
+body{
+    font-family: 'lato';
+}
+
 .post{
     width: 599px;
     height: 190px !important;

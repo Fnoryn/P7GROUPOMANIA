@@ -1,5 +1,9 @@
 @import './globalroot.css';
 
+body{
+    font-family: 'lato';
+}
+
 .main-card{
     width: 800px;
     height: 700px !important;

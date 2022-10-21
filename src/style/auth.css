@@ -1,3 +1,5 @@
+@import './globalroot.css';
+
 .Auth-form-container {
     display: flex;
     justify-content: center;
@@ -12,7 +14,7 @@
     padding-top: 30px;
     padding-bottom: 20px;
     border-radius: 8px;
-    background-color: white;
+    background-color: var(--bg);
   }
   
   .Auth-form-content {
@@ -33,3 +35,20 @@
     font-weight: 600;
     color: rgb(34, 34, 34);
   }
+
+.link-primary{
+  color: var(--primary);
+}
+
+.btn{
+  background-color: var(--primary);
+  border: none;
+}
+
+.btn:hover{
+  background-color: var(--secondary);
+}
+
+body{
+  font-family: 'lato';
+}
