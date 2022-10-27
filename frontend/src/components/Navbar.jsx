@@ -5,10 +5,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import style from '../style/navbar.css';
 import logo from '../assets/icon-left-font-monochrome-black.svg'
 import {NavLink} from 'react-router-dom';
-
+import { useContext } from 'react';
+import { UidContext } from './AppContext';
+import { useSelector } from 'react-redux';
+import Logout from './Logout';
 
 function CollapsibleExample() {
-
+  const uid = useContext(UidContext);
+  const userData = useSelector((state) => state.userReducer);
   return (
     <Navbar collapseOnSelect expand="lg" style={style}>
       <Container>
@@ -22,12 +26,8 @@ function CollapsibleExample() {
             </Container>
           </Nav>
           <Nav>
-          <NavDropdown  title="UserName" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="/add">Créer un post</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/">
-                Logout
-              </NavDropdown.Item>
+          <NavDropdown  title={userData.pseudo} id="collasible-nav-dropdown">
+            <Logout />
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

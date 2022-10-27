@@ -4,13 +4,17 @@ import posttest from '../assets/posttest.jpg'
 import style from '../style/post.css'
 import { BsFillHandThumbsUpFill } from "react-icons/bs";
 import React from 'react';
-
+import { useContext } from 'react';
+import { UidContext } from './AppContext';
+import { useSelector } from 'react-redux';
 function Post() {
+  const uid = useContext(UidContext);
+  const userData = useSelector((state) => state.userReducer);
   return (
    
   <Card style={style} className="post" >
     <Button className='btn-post' href='/list'>
-      <Card.Header className='header'>Posté par : userId </Card.Header>
+      <Card.Header className='header'>Posté par : {userData.pseudo} </Card.Header>
       <Card.Body className='main-post'>
         <Card.Body className='img-card'>
           <Card.Img variant="top" src={posttest} className='img-post' />        

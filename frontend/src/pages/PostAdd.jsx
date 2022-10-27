@@ -14,8 +14,8 @@ function PostAdd() {
         <Card.Title>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>UserName</Form.Label>
-                    <Form.Control type="email" placeholder="Enter UserName" />
+                    <Form.Label>Titre</Form.Label>
+                    <Form.Control type="email" placeholder="Titre" />
                 </Form.Group>
             </Form>
         </Card.Title>

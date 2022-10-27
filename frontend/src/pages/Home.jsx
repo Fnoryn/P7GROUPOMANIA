@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import style from '../style/home.css';
-import Posttest from '../components/Post'
+// import Posttest from '../components/Post'
 function Home() {
   return (
     <>
@@ -13,8 +13,7 @@ function Home() {
         <h1 className='last-post'>DERNIER POST</h1>
       </div>
       <div className='last-post-list'>
-          <Posttest/>
-          <Posttest/>
+
       </div>
     </>
   );
