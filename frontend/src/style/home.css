@@ -1,15 +1,5 @@
 @import './globalroot.css';
 
-@media (height < 1200px){
-    .last-post-list{
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 32px;    
-        padding: 20px;
-    }
-}
 
 body{
     font-family: 'lato';
@@ -31,7 +21,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
+    margin-top: 35px;
 }
 
 .last-post{
@@ -41,10 +31,6 @@ body{
 }
 
 .last-post-list{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 32px;    
-    padding: 20px;
+    display: flex;
+    flex-direction: row;
 }

@@ -1,0 +1,45 @@
+@import './globalroot.css';
+
+.card-rendu{
+    width: 800px;
+    height: 800px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--bgPost) !important;
+}
+
+.header-rendu{
+    background-color: var(--bg) !important;
+}
+.contenu-card-rendu{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-top: 5px;
+}
+.img-card-rendu{
+    background-color: var(--bgPost) !important;
+    max-height: 45%;
+    padding: 0;
+}
+
+.img-rendu{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit:contain;
+    padding: 5px;
+}
+
+.text-card-rendu{
+    padding: 10px 10px 0px 10px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.text-rendu{
+    font-size: 14pt;
+    text-align: justify;
+}

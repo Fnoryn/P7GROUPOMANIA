@@ -1,4 +1,4 @@
-
+import logo from '../assets/icon-left-font-monochrome-black.svg'
 import React from "react"
 import style from '../style/auth.css'
 import Button from 'react-bootstrap/Button';
@@ -71,7 +71,7 @@ import axios from 'axios';
             emailError.innerHTML = res.data.errors.email;
             passwordError.innerHTML = res.data.errors.password;
           } else{
-            window.location='/home'
+            window.location='/'
           }
         })
         .catch((err) => console.log(err));
@@ -87,6 +87,9 @@ import axios from 'axios';
       return (
         <div className="Auth-form-container" style={style}>
           <form className="Auth-form">
+            <div className="img-form-login">
+            <img className='img-login' src={logo} alt="groupomania logo" />
+            </div>
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">Sign In</h3>
               <div className="text-center">
@@ -135,6 +138,9 @@ import axios from 'axios';
     return (
       <div className="Auth-form-container" style={style}>
            <form className="Auth-form" onSubmit={handleLogin} >
+           <div className="img-form-login">
+            <img className='img-login' src={logo} alt="groupomania logo" />
+            </div>
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center">
