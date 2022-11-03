@@ -13,7 +13,6 @@ body{
 }
 
 .post{
-    width: 599px;
     height: 190px !important;
     background: var(--bgPost) !important;
     border-radius: 10px !important;

@@ -17,8 +17,9 @@ module.exports.readPost = (req, res) => {
 
 module.exports.createPost = async (req, res) => {
   let fileName;
-  log.info(`req ${req}`);
+  log.info(`createPost req ${req}`);
   if (req.file !== null) {
+    log.info(``)
     try {
       if (
         req.file.detectedMimeType != "image/jpg" &&
@@ -26,7 +27,7 @@ module.exports.createPost = async (req, res) => {
         req.file.detectedMimeType != "image/jpeg"
       )
         throw Error("invalid file");
-
+        
       if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
       log.error(`erreur créa post ${err}`);
@@ -38,7 +39,8 @@ module.exports.createPost = async (req, res) => {
     await pipeline(
       req.file.stream,
       fs.createWriteStream(
-        `${__dirname}/../client/public/uploads/posts/${fileName}`
+        `${__dirname}/../frontend/public/uploads/posts/${fileName}`,
+        log.info("fichier bien créé")
       )
     );
   }
@@ -49,8 +51,10 @@ module.exports.createPost = async (req, res) => {
     picture: req.file !== null ? "./uploads/posts/" + fileName : "",
     likers: [],
     comments: [],
-  });
 
+  });
+    log.info(`posterId = ${req.body.posterId}`)
+    log.info(`post = ${req.body.post}`)
   try {
     const post = await newPost.save();
     return res.status(201).json(post);

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 // posts
 
 export const GET_POSTS = "GET_POSTS";
@@ -34,6 +33,7 @@ export const getPosts = (num) => {
   
   export const addPost = (data) => {
     return (dispatch) => {
+      console.log(`data post action = ${data}`)
       return axios
         .post(`${process.env.REACT_APP_API_URL}api/post/`, data)
         .then((res) => {
@@ -50,7 +50,7 @@ export const getPosts = (num) => {
     return (dispatch) => {
       return axios({
         method: "patch",
-        url: `${process.env.REACT_APP_API_URL}api/post/like-post/` + postId,
+        url: `${process.env.REACT_APP_API_URL}api/post/${postId}/like`,
         data: { id: userId },
       })
         .then((res) => {
@@ -64,7 +64,7 @@ export const getPosts = (num) => {
     return (dispatch) => {
       return axios({
         method: "patch",
-        url: `${process.env.REACT_APP_API_URL}api/post/unlike-post/` + postId,
+        url: `${process.env.REACT_APP_API_URL}api/post/${postId}/like`,
         data: { id: userId },
       })
         .then((res) => {

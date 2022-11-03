@@ -1,29 +1,25 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import {BsImageFill} from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import style from '../../style/postAdd.css';
-import styleRendu from '../../style/postRendu.css'
-import Navbar from '../Navbar';
+import { isEmpty, timestampParser } from "../utils/Utils";
+import { addPost, getPosts } from "../../actions/post.actions";
+import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
-import { useEffect } from 'react';
-import { isEmpty } from '../utils/Utils';
-import { addPost, getPosts } from '../../actions/post.actions';
-
-
-const  PostAdd = () =>{
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card';
+import { AiOutlineFileImage } from '@react-icons/all-files/ai/AiOutlineFileImage';
+import CardImg from "react-bootstrap/esm/CardImg";
+const NewPostForm = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [message, setMessage] = useState('');
-  const [postPicture, setPostPicture] = useState(null)
+  const [message, setMessage] = useState("");
+  const [postPicture, setPostPicture] = useState("");
   const [file, setFile] = useState();
   const userData = useSelector((state) => state.userReducer);
+  const error = useSelector((state) => state.errorReducer.postError);
   const dispatch = useDispatch();
-
-  const handlePost = async() => {
-    if (message || postPicture){
+  
+  const handlePost = async () => {
+    if (message || postPicture) {
       const data = new FormData();
       data.append('posterId', userData._id);
       data.append('message', message);
@@ -31,95 +27,98 @@ const  PostAdd = () =>{
 
       await dispatch(addPost(data));
       dispatch(getPosts());
-      setMessage("");
-      setPostPicture("");
-      setFile("");
-    } 
-  }
-
-  const handlePicture = (e) =>{
+      cancelPost();
+    } else {
+      alert("Veuillez entrer un message")
+    }
+  };
+ 
+  const handlePicture = (e) => {
     setPostPicture(URL.createObjectURL(e.target.files[0]));
-    console.log("handlePicture");
     setFile(e.target.files[0]);
-  }
+  }; 
+
+  const cancelPost = () => {
+    setMessage("");
+    setPostPicture("");
+    setFile("");
+  };
 
 
   useEffect(() => {
     if (!isEmpty(userData)) setIsLoading(false);
-  }, [userData])
+    
+  }, [userData, message]);
 
   return (
-    <>    
-    <Navbar />
-    {isLoading ? (
-      <div className='loader'>
-          <Spinner animation="grow" role="status">
-              <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-
-    ) : (
-      <Card className='main-card' style={style}>
-        <Card.Body className='upload-img'>              
-            <Button className='btn-upload-img'>              
-              <BsImageFill className='bs-img' />
-              <Form.Control 
-              type="file" 
-              id="file-upload"
-              name='file'
-              accept=".jpg, .jepg, .png"
-              onChange={(e) => handlePicture(e)}
-              className='btnInput'       
-              size="lg"
-               />
-              </Button>
-        </Card.Body>
-      <Card.Body className='username-card'>
-
-    <Card.Body>
-    <InputGroup>
-        <InputGroup.Text>Text</InputGroup.Text>
-        <Form.Control as="textarea" 
-        aria-label="With textarea" 
-        className='textarea-card' 
-        name='message' 
-        id='message'
-        maxLength={500}
-        placeholder='Text' 
-        onChange={(e) => setMessage(e.target.value)} 
-        value={message} 
-        />
-      </InputGroup>
-    </Card.Body>
-      </Card.Body>        
-      <Card.Body className='card-publier'>
-            <Button variant="primary" className='btn-publier send' onClick={handlePost} href='/home'>Publier</Button>
-        </Card.Body>
-
-    </Card>
-    )
-  }
-        {message || postPicture ? (
-          <Card className='card-rendu' style={styleRendu}>
-              <Card.Header className='header-rendu' >
-               Posté par : {userData.pseudo}
+    <Card className="post-container-add" style={style}>
+      {isLoading ? (
+          <Spinner animation="grow" />
+      ) : (
+        <>
+          <Card.Body className="post-form-add">
+            <Card.Body className="post-add">
+              <Card.Header className="cardHeader">
+                <Card.Title className="cardTitle">
+                  {userData.pseudo}
+                </Card.Title>
+                <Form.Control
+                    as="textarea"
+                    name="message"
+                    id="message"
+                    placeholder="Text"
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                    maxLength={180}
+                    style={{ height: '100px' }}
+                  />
               </Card.Header>
-              <Card.Body className='contenu-card-rendu'>
-                  <Card.Body className='img-card-rendu'>
-                      <Card.Img className='img-rendu' variant="top" src={postPicture} alt="pic posté"></Card.Img>
-                  </Card.Body>
-                  <Card.Body className='text-card-rendu'>
-                    <Card.Text className='text-rendu'>
-                      {message}
-                    </Card.Text>
-                  </Card.Body>
-              </Card.Body>
-              
-          </Card>
-
-        ): null}
-    </>
+            {message || postPicture ? (
+              <Card className="card-container">
+                <Card.Body className="cardPost">
+                  <Card.Header className="cardHeader">
+                    <Card.Title className="cardTitle">
+                      {userData.pseudo}
+                    </Card.Title>
+                    <Card.Title className="cardTitle">{timestampParser(Date.now())}</Card.Title>
+                  </Card.Header>
+                    <Card.Text className="content">{message}</Card.Text>
+                    <CardImg className="cardImg" src={postPicture}  alt="" />
+                </Card.Body>
+              </Card>
+            ) : null}
+            <Card.Footer className="footer-form">
+              <div className="icon">
+                  <>
+                    <AiOutlineFileImage className="icon-img-upload" />
+                    <input
+                      type="file"
+                      id="file-upload"
+                      name="file"
+                      accept=".jpg, .jpeg, .png"
+                      onChange={(e) => handlePicture(e)}
+                    />
+                  </>
+              </div>
+              {!isEmpty(error.format) && <p>{error.format}</p>}
+              {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
+              <div className="btn-send">
+                {message || postPicture ? (
+                  <Button className="cancel" onClick={cancelPost}>
+                    Annuler message
+                  </Button>
+                ) : null}
+                <Button className="send" onClick={handlePost}>
+                  Envoyer
+                </Button>
+              </div>
+            </Card.Footer>
+            </Card.Body>
+          </Card.Body>
+        </>
+      )}
+    </Card>
   );
-}
+};
 
-export default PostAdd;
+export default NewPostForm;

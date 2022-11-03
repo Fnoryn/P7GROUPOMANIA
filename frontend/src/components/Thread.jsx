@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/post.actions";
 import Post from "./Post/Post";
 import { isEmpty } from "./utils/Utils";
+import style from '../style/thread.css';
 const Thread = () => {
     const [loadPost, setLoadPost] = useState(true);
     const dispatch = useDispatch();
@@ -17,16 +18,15 @@ const Thread = () => {
 
 
     return(
-        <div className="tread-container">
-            <u>
+        <div className="listPost" style={style}>
+            <ul>
                 {!isEmpty(posts[0]) && 
                     posts.map((post) => {
                         return <Post post={post} key={post._id} />;
-                    })
-                }
-            </u>
+                    })}
+            </ul>
         </div>
-    )
-}
+    );
+};
 
 export default Thread;

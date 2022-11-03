@@ -17,20 +17,19 @@ body{
     background-color: var(--secondary) !important;
 }
 
-.mb-2{
+.mainContent{
+    width: 600px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 35px;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.last-post{
-    text-align: center;
-    margin: 0;
-    padding: 5%;
+
+.postAdd{
+    margin-bottom: 5px;
 }
 
-.last-post-list{
-    display: flex;
-    flex-direction: row;
+.thread{
+    width: 100%;
 }

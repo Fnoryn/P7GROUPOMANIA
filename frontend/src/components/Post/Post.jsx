@@ -1,6 +1,5 @@
 import Card from 'react-bootstrap/Card';
 import style from '../../style/post.css'
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from '../utils/Utils';
 import LikeBtn from './LikeBtn';
@@ -9,12 +8,15 @@ import { BsFillChatLeftTextFill, BsFillPencilFill } from 'react-icons/bs';
 import { updatePost } from '../../actions/post.actions';
 import DeletePost from './DeletePost';
 import PostComments from './PostComments';
+import CardImg from 'react-bootstrap/esm/CardImg';
+// import CardImg from 'react-bootstrap/esm/CardImg';
 
 
 const Post = ({post}) => {
   const userData = useSelector((state) => state.userReducer);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
+  const usersData = useSelector((state) => state.usersReducer);
   const [showComments, setShowComments] = useState(false);
   const dispatch = useDispatch();
 
@@ -25,25 +27,28 @@ const Post = ({post}) => {
     setIsUpdated(false);
   }
 
+
+ console.log(`post._id = ${post._id}`)
+ console.log(`post.posterId = ${post.posterId}`)
+ console.log(`user data id = ${userData._id}`) 
+ console.log(` le pseudo est = ${userData.pseudo}`)
   return (
   <Card style={style} className="post" key={post._id} >
       <Card.Header className='header'>Posté par : 
-          {
-            !isEmpty(userData[0]) && 
-            userData
-              .map((user) => {
-                if(user._id === post.posterId) return user.pseudo
-                else return null
-              })
-          } 
+      {!isEmpty(usersData[0]) &&
+                    usersData
+                      .map((user) => {
+                        console.log(`user id = ${user._id}`)
+                        if (user._id === post.posterId) return user.pseudo;
+                        else return null;
+                      })
+                      .join("")}
           </Card.Header>
       <Card.Body className='main-post'>
-        <Card.Body className='img-card'>
-          <Card.Img variant="top" src={post.picture} alt="card-pic" className='img-post' />        
-        </Card.Body>
+
         <Card.Body className='txt-post' >
           <Card.Text className='paragraph-post' >
-            {isUpdated === false && <p>{post.message}</p>}
+            {isUpdated === false && <span>{post.message}</span>}
             {isUpdated === true &&  (
               <div className='update-post-txt'>
                 <textarea
@@ -59,6 +64,7 @@ const Post = ({post}) => {
             )
             }
           </Card.Text>
+          <CardImg className="img-card" src={post.Picture}  alt="" />   
           {userData._id === post.posterId && (
             <div className='btn-to-update'>
               <div onClick={() => setIsUpdated(!isUpdated)}>
