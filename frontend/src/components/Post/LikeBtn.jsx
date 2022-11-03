@@ -34,7 +34,7 @@ const LikeBtn = ({post}) => {
                 <Button variant="primary" className='btn-like' onClick={like}><BsFillHandThumbsUpFill/></Button>
             )}
             {uid && liked && (
-                <Button variant="primary" className='btn-unlike' onClick={unLike} ><BsFillHandThumbsUpFill/></Button>
+                <Button variant="secondary" className='btn-unlike' onClick={unLike} ><BsFillHandThumbsUpFill/></Button>
             )}
         </div>
     )

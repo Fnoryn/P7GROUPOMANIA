@@ -6,26 +6,26 @@ export default function postReducer(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS:
             return action.payload;
-        case LIKE_POST:
-            return state.map((post) => {
-                if(post._id === action.payload.postId){
+            case LIKE_POST:
+                return state.map((post) => {
+                  if (post._id === action.payload.postId) {
                     return {
-                        ...post,
-                        likers: [action.payload.userId, ...post.likers]
-                    }
-                }
-                return post;
-            });
-        case UNLIKE_POST: 
-            return state.map((post) => {
-                if(post._id === action.payload.postId){
-                    return{
-                        ...post,
-                        likers: post.likers.filter((id) => id !== action.payload.userId )
-                    }
-                }
-                return post;
-            })
+                      ...post,
+                      likers: [action.payload.userId, ...post.likers],
+                    };
+                  }
+                  return post;
+                });
+            case UNLIKE_POST:
+                return state.map((post) => {
+                  if (post._id === action.payload.postId) {
+                    return {
+                      ...post,
+                      likers: post.likers.filter((id) => id !== action.payload.userId),
+                    };
+                  }
+                  return post;
+                });
         case UPDATE_POST:
             return state.map((post) =>{
                 if(post._id === action.payload.postId){
@@ -62,8 +62,10 @@ export default function postReducer(state = initialState, action) {
                 if(post._id === action.payload.postId){
                     return {
                         ...post,
-                        comment: post.comment.filter((comment) => comment._id !== action.payload.commentId)
-                    }
+                        comments: post.comments.filter(
+                          (comment) => comment._id !== action.payload.commentId
+                        ),
+                      };
                 } else return post
             });
         default: 

@@ -9,7 +9,7 @@ import { updatePost } from '../../actions/post.actions';
 import DeletePost from './DeletePost';
 import PostComments from './PostComments';
 import CardImg from 'react-bootstrap/esm/CardImg';
-// import CardImg from 'react-bootstrap/esm/CardImg';
+
 
 
 const Post = ({post}) => {
@@ -32,10 +32,11 @@ const Post = ({post}) => {
  console.log(`post.posterId = ${post.posterId}`)
  console.log(`user data id = ${userData._id}`) 
  console.log(` le pseudo est = ${userData.pseudo}`)
-  return (
+ console.log(` img post = ${post.Picture}`)
+  return ( 
   <Card style={style} className="post" key={post._id} >
       <Card.Header className='header'>Posté par : 
-      {!isEmpty(usersData[0]) &&
+      {!isEmpty(usersData[""]) &&
                     usersData
                       .map((user) => {
                         console.log(`user id = ${user._id}`)
@@ -47,7 +48,7 @@ const Post = ({post}) => {
       <Card.Body className='main-post'>
 
         <Card.Body className='txt-post' >
-          <Card.Text className='paragraph-post' >
+          <Card.Body className='paragraph-post' >
             {isUpdated === false && <span>{post.message}</span>}
             {isUpdated === true &&  (
               <div className='update-post-txt'>
@@ -62,9 +63,9 @@ const Post = ({post}) => {
                 </div>
               </div>
             )
-            }
-          </Card.Text>
-          <CardImg className="img-card" src={post.Picture}  alt="" />   
+            }          
+            <CardImg className="img-card" src={post.Picture}  alt="" />  
+          </Card.Body>
           {userData._id === post.posterId && (
             <div className='btn-to-update'>
               <div onClick={() => setIsUpdated(!isUpdated)}>

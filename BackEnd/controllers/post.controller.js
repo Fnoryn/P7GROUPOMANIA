@@ -7,7 +7,7 @@ const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
-
+const sharp = require("sharp");
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
     if (!err) res.send(docs);
@@ -19,47 +19,43 @@ module.exports.createPost = async (req, res) => {
   let fileName;
   log.info(`createPost req ${req}`);
   if (req.file !== null) {
-    log.info(``)
     try {
       if (
-        req.file.detectedMimeType != "image/jpg" &&
-        req.file.detectedMimeType != "image/png" &&
-        req.file.detectedMimeType != "image/jpeg"
+        req.file.mimetype != "image/jpg" &&
+        req.file.mimetype != "image/png" &&
+        req.file.mimetype != "image/jpeg"
       )
         throw Error("invalid file");
-        
-      if (req.file.size > 500000) throw Error("max size");
+  
+      if (req.file.size > 900000) throw Error("max size");
     } catch (err) {
-      log.error(`erreur créa post ${err}`);
       const errors = uploadErrors(err);
-      return res.status(201).json({ errors });
+      log.error(`createPost 2 req ${req}`);
     }
     fileName = req.body.posterId + Date.now() + ".jpg";
 
-    await pipeline(
-      req.file.stream,
-      fs.createWriteStream(
-        `${__dirname}/../frontend/public/uploads/posts/${fileName}`,
-        log.info("fichier bien créé")
-      )
-    );
-  }
+
+      await sharp(req.file.buffer)
+        .toFile(`${__dirname}/../../frontend/public/uploads/posts${fileName}`
+        );
+      res.status(201).send("Photo de profil chargé avec succés");
+  
 
   const newPost = new postModel({
     posterId: req.body.posterId,
     message: req.body.message,
-    picture: req.file !== null ? "./uploads/posts/" + fileName : "",
+    picture: req.file !== null ?  + fileName : "",
     likers: [],
     comments: [],
 
   });
     log.info(`posterId = ${req.body.posterId}`)
-    log.info(`post = ${req.body.post}`)
   try {
     const post = await newPost.save();
     return res.status(201).json(post);
   } catch (err) {
     return res.status(400).send(err);
+  }
   }
 };
 
@@ -114,6 +110,7 @@ module.exports.likePost = async (req, res) => {
       { new: true })
             .then((data) => res.send(data))
             .catch((err) => res.status(500).send({ message: err }));
+            log.error(`erreur like : ${err}`);
     } catch (err) {
         return res.status(400).send(err);
     }

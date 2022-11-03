@@ -24,7 +24,7 @@ const NewPostForm = () => {
       data.append('posterId', userData._id);
       data.append('message', message);
       if (file) data.append("file", file);
-
+      console.log(` handlePost data = ${data}`)
       await dispatch(addPost(data));
       dispatch(getPosts());
       cancelPost();
