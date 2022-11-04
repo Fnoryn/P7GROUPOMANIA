@@ -4,11 +4,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import { BsFillPencilFill, BsTrashFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteComment, editComment } from "../../actions/post.actions";
 import { UidContext } from "../AppContext";
 
 const EditDeleteComment = ({comment, postId}) => {
+    const userData = useSelector((state) => state.userReducer);
     const [isAuthor, setIsAuthor] = useState(false);
     const [edit, setEdit] = useState(false);
     const [text, setText] = useState('');
@@ -23,6 +24,8 @@ const EditDeleteComment = ({comment, postId}) => {
             setEdit(false);
         }
     }
+
+    const isAdmin = userData.isAdmin;
 
     const handleDelete = () =>  dispatch(deleteComment(postId, comment._id))
 
@@ -44,7 +47,7 @@ const EditDeleteComment = ({comment, postId}) => {
             )}
             {isAuthor && edit && (
                 <form onSubmit={handleEdit} className="edit-comment-form" >
-                    <label htmlFor="text" onClick={() => setEdit(!edit)}>Editer</label>
+                    <label htmlFor="text" onClick={() => setEdit(!edit)}><BsFillPencilFill/></label>
                     <br />
                     <input 
                     type="text" 
@@ -64,6 +67,19 @@ const EditDeleteComment = ({comment, postId}) => {
                     <input type="submit" value="valider modification" />
                     </div>
                 </form>
+            )}
+            {isAdmin === true && (
+                <form onSubmit={handleEdit} className="edit-comment-form" >
+                    <div>
+                    <Button onClick={() => {
+                        if (window.confirm("Voulez-vous supprimer ce commentaire ?")){
+                            handleDelete();
+                        }
+                    }} >
+                        <BsTrashFill/>
+                    </Button>
+                    </div>
+                </form>               
             )}
         </div>
     )

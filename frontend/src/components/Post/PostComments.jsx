@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, getPosts } from "../../actions/post.actions";
-import { timestampParser } from "../utils/Utils";
 import EditDeleteComment from "./EditDeleteComment";
+import style from '../../style/postComments.css'
+
 
 const PostComments = ({ post }) => {
     const [text, setText] = useState("");
@@ -21,7 +22,7 @@ const PostComments = ({ post }) => {
     }
 
     return (
-        <div className="comments-container">
+        <div className="comments-container" style={style}>
             {post.comments.map((comment) => {
                 return(
                     <div className={comment.commenterId === userData._id ? 
@@ -31,7 +32,6 @@ const PostComments = ({ post }) => {
                             <div className="pseudo">
                                 <h3>{comment.commenterPseudo}</h3>
                             </div>
-                            <span>{timestampParser(comment.tiemstamp)}</span>
                         </div>
                         <p>{comment.text}</p>
                         <EditDeleteComment comment={comment} postId={post._id} />

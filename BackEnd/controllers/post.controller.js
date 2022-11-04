@@ -16,9 +16,9 @@ module.exports.readPost = (req, res) => {
 };
 
 module.exports.createPost = async (req, res) => {
-  let fileName;
+  const fileName = req.body.posterId + Date.now() + ".jpg";
   log.info(`createPost req ${req}`);
-  if (req.file !== null) {
+  if(req.fill !== null){
     try {
       if (
         req.file.mimetype != "image/jpg" &&
@@ -27,36 +27,24 @@ module.exports.createPost = async (req, res) => {
       )
         throw Error("invalid file");
   
-      if (req.file.size > 900000) throw Error("max size");
+      if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
       const errors = uploadErrors(err);
       log.error(`createPost 2 req ${req}`);
     }
-    fileName = req.body.posterId + Date.now() + ".jpg";
-
-
-      await sharp(req.file.buffer)
-        .toFile(`${__dirname}/../../frontend/public/uploads/posts${fileName}`
-        );
-      res.status(201).send("Photo de profil chargé avec succés");
+        await sharp(req.file.buffer)
+        .toFile(`${__dirname}/../../frontend/src/pics/ ${fileName}`);
+      res.status(201).send("Photo chargé avec succés");
+  }
+    const newPost = new postModel({
+      posterId: req.body.posterId,
+      message: req.body.message,
+      picture: req.file !== null ? "../../pics" + fileName: "",
+      likers: [],
+      comments: [],
+    });
   
-
-  const newPost = new postModel({
-    posterId: req.body.posterId,
-    message: req.body.message,
-    picture: req.file !== null ?  + fileName : "",
-    likers: [],
-    comments: [],
-
-  });
-    log.info(`posterId = ${req.body.posterId}`)
-  try {
-    const post = await newPost.save();
-    return res.status(201).json(post);
-  } catch (err) {
-    return res.status(400).send(err);
-  }
-  }
+    const post = newPost.save();
 };
 
 module.exports.updatePost = (req, res) => {

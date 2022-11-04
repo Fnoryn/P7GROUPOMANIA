@@ -80,7 +80,7 @@ const NewPostForm = () => {
                     <Card.Title className="cardTitle">
                       {userData.pseudo}
                     </Card.Title>
-                    <Card.Title className="cardTitle">{timestampParser(Date.now())}</Card.Title>
+                    <Card.Title className="timeStamp">{timestampParser(Date.now())}</Card.Title>
                   </Card.Header>
                     <Card.Text className="content">{message}</Card.Text>
                     <CardImg className="cardImg" src={postPicture}  alt="" />
