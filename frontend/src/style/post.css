@@ -5,6 +5,8 @@
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 10px;
+    box-shadow: 0px 2px 6px 5px rgb(0 0 0 / 25%);
+    background-color: var(--bgPost);
 }
 .spinner-border{
     width: 110px;
@@ -19,10 +21,7 @@
 
 .main-post{
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    
+    padding: 0;   
 }
 
 .update-message{
@@ -54,8 +53,8 @@
 .img-card{
     width: 100%;
     height: 100%;
-    max-height: 360px;
-    max-width: 360px;
+    object-fit: cover;
+    
 }
 .comm-post{
     display: flex;
@@ -64,7 +63,8 @@
 .paragraph-post{
     display: flex;
     flex-direction: column;
+}
+
+.text-post{
     width: 100%;
-    height: 500px;
-    align-items: center;
 }

@@ -1,9 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import style from '../../style/post.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from '../utils/Utils';
 import LikeBtn from './LikeBtn';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BsFillChatLeftTextFill, BsFillPencilFill } from 'react-icons/bs';
 import { updatePost } from '../../actions/post.actions';
 import DeletePost from './DeletePost';
@@ -11,11 +10,9 @@ import PostComments from './PostComments';
 import CardImg from 'react-bootstrap/esm/CardImg';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
-import Spinner from 'react-bootstrap/esm/Spinner';
 
 
 const Post = ({ post }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);  
@@ -29,10 +26,6 @@ const Post = ({ post }) => {
     setIsUpdated(false);
   }
 
-  useEffect(() => {
-    !isEmpty(usersData[0]) && setIsLoading(false);
-  }, [usersData]);
-
 
  console.log(`post._id = ${post._id}`)
  console.log(`post.posterId = ${post.posterId}`)
@@ -40,31 +33,19 @@ const Post = ({ post }) => {
  console.log(` le pseudo est = ${userData.pseudo}`)
  console.log(` img post = ${post.picture}`)
  console.log(` vérif isAdmin = ${userData.isAdmin}`)
- console.log(`info sur userS = ${usersData._id}`)
+ console.log(` users data pseudo = ${usersData.pseudo}`)
+ console.log(`c quoi usersData._id : ${usersData._id}`)
   return (
 <Card style={style} className="post" key={post._id} >
-  {isLoading ? (
-    
-     <Spinner animation="border"> 
-         {console.log(`isEmpty = ${isEmpty.value}`)}
-     </Spinner>
-  ): (
-    <>
-    {console.log(`isEmpty = ${isEmpty.value}`)}
     <Card.Header className='header'>
-      {!isEmpty(usersData[0]) &&
-                    usersData
-                      .map((user) => {
-                        console.log("alo ?")
-                        if (user._id === post.posterId) return user.pseudo;
-                        else return null;
-                      })
-                      .join("")}
-      </Card.Header>
+      <Card.Title>Posté par : 
+              {post.pseudo}
+      </Card.Title>
+    </Card.Header>
       <Card.Body className='main-post'>
         <Card.Body className='txt-post' >
           <Card.Body className='paragraph-post' >
-            {isUpdated === false && <span>{post.message}</span>}
+            {isUpdated === false && <Card.Text className='text-post'> {post.message}</Card.Text>}
             {isUpdated === true &&  (
               <div className='update-post-txt'>
                 <Form.Control
@@ -109,8 +90,6 @@ const Post = ({ post }) => {
           </Card.Footer>
         </Card.Body> 
       </Card.Body>
-    </>
-  )}
 </Card>
  
   );

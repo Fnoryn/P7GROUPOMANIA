@@ -18,7 +18,7 @@ module.exports.readPost = (req, res) => {
 module.exports.createPost = async (req, res) => {
   const fileName = req.body.posterId + Date.now() + ".jpg";
   log.info(`createPost req ${req}`);
-  if(req.fill !== null){
+  if(req.file !== null){
     try {
       if (
         req.file.mimetype != "image/jpg" &&
@@ -32,14 +32,20 @@ module.exports.createPost = async (req, res) => {
       const errors = uploadErrors(err);
       log.error(`createPost 2 req ${req}`);
     }
-        await sharp(req.file.buffer)
-        .toFile(`${__dirname}/../../frontend/src/pics/ ${fileName}`);
+    try{
+      await sharp(req.file.buffer)
+        .toFile(`${__dirname}\\..//images\\//${fileName}`);
+        log.info(`path toFile = ${__dirname} `)
       res.status(201).send("Photo chargé avec succés");
+    } catch(err) {
+      res.status(400).send(err);
+    }
+
   }
     const newPost = new postModel({
       posterId: req.body.posterId,
       message: req.body.message,
-      picture: req.file !== null ? "../../pics" + fileName: "",
+      picture: req.file !== null ?  fileName: "",
       likers: [],
       comments: [],
     });

@@ -10,13 +10,13 @@ import Logout from './Logout';
 function CollapsibleExample() {
   const userData = useSelector((state) => state.userReducer);
   return (
-    <Navbar collapseOnSelect expand="lg" style={style}>
+    <Navbar collapseOnSelect expand="lg" style={style} className='main-nav'>
       <Container>
         <Navbar.Brand className='logo' href="/home"> <img className='img-logo' src={logo} alt="groupomania logo" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
-          <NavDropdown  title={userData.pseudo} id="collasible-nav-dropdown">
+          <NavDropdown className='pseudo-nav' title={userData.pseudo} id="collasible-nav-dropdown">
             <Logout />
             </NavDropdown>
           </Nav>
