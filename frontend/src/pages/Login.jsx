@@ -26,7 +26,6 @@ import axios from 'axios';
       },
     })
       .then((res) => {
-        console.log(res);
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
@@ -65,7 +64,6 @@ import axios from 'axios';
         },
       })
         .then((res) => {
-          console.log(res);
           if (res.data.errors) {
             pseudoError.innerHTML = res.data.errors.pseudo;
             emailError.innerHTML = res.data.errors.email;

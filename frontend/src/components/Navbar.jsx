@@ -16,6 +16,7 @@ function CollapsibleExample() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
+            
           <NavDropdown className='pseudo-nav' title={userData.pseudo} id="collasible-nav-dropdown">
             <Logout />
             </NavDropdown>
