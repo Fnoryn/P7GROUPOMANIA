@@ -62,5 +62,9 @@ MongoDB account.
    ```sh
    npm i -s
    ```
+7. Open the BackEnd folder in VScode explorer and creat 2 folder
+```sh
+    public -> images
+```
 
 ## Enjoy your experience 
