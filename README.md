@@ -5,7 +5,8 @@
 Creat a social network for Groupomania
 
 Vue of the project :
-![Imgur]https://i.imgur.com/1NnzLWE.jpg
+![Imgur]<img src="https://i.imgur.com/1NnzLWE.jpg" title="source: imgur.com"  style="display: inline-block; margin: 0 auto; max-width: 300px">/>"
+
 ## we need to :
 
 * Creat acount
